@@ -8,15 +8,22 @@
 #Popis: Makefile pre IPK-projekt č.1
 
 CC = gcc
-CFLAGS = -g -std=c18 -pedantic -Wall -Wextra 
+CFLAGS = -std=c18 -pedantic -Wall -Wextra -g -fcommon 
 
-.PHONY: build clean
+.PHONY: ipkcpc error.o ipkcpc.o clean
 
-build:
-	$(CC) $(CFLAGS) -c ipkcpc.c -o ipkcpc
+ipkcpc: ipkcpc.o error.o
+	$(CC) $(CFLAGS) error.o ipkcpc.o -o ipkcpc
+
+error.o: error.h error.c 
+	$(CC) $(CFLAGS) -c error.c -o error.o
+
+ipkcpc.o:
+	$(CC) $(CFLAGS) -c ipkcpc.c -o ipkcpc.o
 
 zip:
 	zip xkezni01 *
+	
 clean:
 	rm -f ipkcpc
 	rm -f xkezni01.zip
