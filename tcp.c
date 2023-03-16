@@ -7,6 +7,9 @@
 
 #include "tcp.h"
 
+char buf[BUFSIZE] = "init";
+int client_socket, bytestx, bytesrx;
+
 /**
  * @brief Vynuluje pamäť zadanú ako argument funkcie o zadanej veľkosti
  *
@@ -18,6 +21,38 @@ void null_memory(char *memory, int memory_size)
 	memset(memory, '\0', memory_size);
 }
 
+void catch_sigint()
+{
+	if (buf != NULL && !strcmp(buf, "init"))
+	{
+		close(client_socket);
+	}
+	else
+	{
+		null_memory(buf, BUFSIZE);
+		strcpy(buf, "BYE\n");
+		printf("%s", buf);
+		fflush(stdout);
+		bytestx = send(client_socket, buf, strlen(buf), 0);
+		if (bytestx < 0)
+		{
+			perror("ERROR in sendto");
+		}
+
+		null_memory(buf, BUFSIZE);
+		bytesrx = recv(client_socket, buf, BUFSIZE, 0);
+
+		if (bytesrx < 0)
+		{
+			perror("ERROR in recvfrom");
+		}
+		printf("%s", buf);
+		fflush(stdout);
+		close(client_socket);
+	}
+	exit(SIGINT);
+}
+
 /**
  * @brief Vykoná TCP komunikáciu pre zadané argumenty programu
  *
@@ -25,11 +60,12 @@ void null_memory(char *memory, int memory_size)
  */
 void tcp(struct Arguments *args)
 {
-	int client_socket, port_number, bytestx, bytesrx;
+	int port_number;
 	const char *server_hostname;
 	struct hostent *server;
 	struct sockaddr_in server_address;
-	char buf[BUFSIZE];
+
+	signal(SIGINT, catch_sigint);
 
 	server_hostname = args->host;
 	char *text;
@@ -68,8 +104,6 @@ void tcp(struct Arguments *args)
 		{
 			break;
 		}
-
-		null_memory(buf, BUFSIZE);
 
 		/* Načítanie vstupu od užívateľa */
 		if (!fgets(buf, BUFSIZE, stdin) || !strchr(buf, '\n'))
@@ -120,6 +154,7 @@ void tcp(struct Arguments *args)
 		{
 			break;
 		}
+		null_memory(buf, BUFSIZE);
 	}
 	/* Ukončenie spojenia */
 	close(client_socket);
