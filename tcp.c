@@ -19,14 +19,13 @@ void null_memory(char *memory, int memory_size)
 }
 
 /**
- * @brief Vykoná TCP komunikáciu pre zadané argumenty programu 
+ * @brief Vykoná TCP komunikáciu pre zadané argumenty programu
  *
  * @param args Skontrolované argumenty programu
  */
 void tcp(struct Arguments *args)
 {
 	int client_socket, port_number, bytestx, bytesrx;
-	socklen_t serverlen;
 	const char *server_hostname;
 	struct hostent *server;
 	struct sockaddr_in server_address;
@@ -38,7 +37,14 @@ void tcp(struct Arguments *args)
 
 	null_memory((char *)&server_address, sizeof(server_address));
 
+	if ((server = gethostbyname(server_hostname)) == NULL)
+	{
+		error_exit("Zadaný host neexistuje %s", server_hostname);
+	}
+
+	null_memory((char *)&server_address, sizeof(server_address));
 	server_address.sin_family = AF_INET;
+	memcpy((char *)&server_address.sin_addr.s_addr, (char *)server->h_addr_list[0], server->h_length);
 	server_address.sin_port = htons(port_number);
 
 	/* Vytvorenie socketu */
@@ -99,7 +105,7 @@ void tcp(struct Arguments *args)
 		}
 
 		null_memory(buf, BUFSIZE);
-	
+
 		/* Prijatie správy od servera */
 		bytesrx = recv(client_socket, buf, BUFSIZE, 0);
 
@@ -115,6 +121,6 @@ void tcp(struct Arguments *args)
 			break;
 		}
 	}
-	
+	/* Ukončenie spojenia */
 	close(client_socket);
 }

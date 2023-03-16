@@ -4,3 +4,8 @@
  * @brief Funkcie pre UDP komunikáciu klienta pre IPK Calculator Protokol
  * @date 2023-03-21
  */
+
+void udp()
+{
+    
+}
