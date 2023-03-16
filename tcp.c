@@ -21,35 +21,33 @@ void null_memory(char *memory, int memory_size)
 	memset(memory, '\0', memory_size);
 }
 
+/**
+ * @brief V prípade ukončenia programu pomocou signálu SIGINT ukončí komunikáciu so serverom
+ *
+ */
 void catch_sigint()
 {
-	if (buf != NULL && !strcmp(buf, "init"))
+	null_memory(buf, BUFSIZE);
+	strcpy(buf, "BYE\n");
+	printf("%s", buf);
+	fflush(stdout);
+	bytestx = send(client_socket, buf, strlen(buf), 0);
+	if (bytestx < 0)
 	{
-		close(client_socket);
+		perror("ERROR in sendto");
 	}
-	else
+
+	null_memory(buf, BUFSIZE);
+	bytesrx = recv(client_socket, buf, BUFSIZE, 0);
+
+	if (bytesrx < 0)
 	{
-		null_memory(buf, BUFSIZE);
-		strcpy(buf, "BYE\n");
-		printf("%s", buf);
-		fflush(stdout);
-		bytestx = send(client_socket, buf, strlen(buf), 0);
-		if (bytestx < 0)
-		{
-			perror("ERROR in sendto");
-		}
-
-		null_memory(buf, BUFSIZE);
-		bytesrx = recv(client_socket, buf, BUFSIZE, 0);
-
-		if (bytesrx < 0)
-		{
-			perror("ERROR in recvfrom");
-		}
-		printf("%s", buf);
-		fflush(stdout);
-		close(client_socket);
+		perror("ERROR in recvfrom");
 	}
+	printf("%s", buf);
+	fflush(stdout);
+	close(client_socket);
+
 	exit(SIGINT);
 }
 
