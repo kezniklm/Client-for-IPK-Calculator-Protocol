@@ -50,3 +50,23 @@ $ ./ipkcpc -p 65000 -m udp -h 192.168.100.1
 
 $ ./ipkcpc -m udp -h 192.168.100.1 -p 65000
 ```
+
+## Príklady použitia
+```
+$ ./ipkcpc -h 127.0.0.1 -p 2023 -m tcp
+HELLO
+HELLO
+SOLVE (+ 1 2)
+RESULT 3
+SOLVE (+ 500 200)
+RESULT 700
+BYE
+BYE
+```
+```
+$ ./ipkcpc -h 147.229.176.19 -p 10002 -m udp
+(+ 1 2)
+OK:3
+(1+1)
+ERR:Could not parse the message
+```
