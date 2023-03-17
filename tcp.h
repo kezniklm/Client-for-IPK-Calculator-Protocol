@@ -5,13 +5,23 @@
  * @date 2023-03-21
  */
 
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <signal.h>
+/* Knižnice pre prácu na Windows operačnom systéme */
+#ifdef _WIN32
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #include <Windows.h>
+#endif
+
+/* Knižnice pre prácu na Unix operačnom systéme */
+#ifdef __unix__
+    #include <sys/socket.h>
+    #include <sys/types.h>
+    #include <netdb.h>
+    #include <arpa/inet.h>
+    #include <netinet/in.h>
+    #include <unistd.h>
+    #include <signal.h>
+#endif
 
 #include "args.h"
 
