@@ -17,7 +17,7 @@
 #include "args.h"
 
 #define BUFSIZE 512
-#define OPCODE 0
+#define OPCODE_POSITION 0
 #define STATUS 1 
 #define RECIEVE_PAYLOAD 2
 #define SEND_PAYLOAD 1
@@ -27,6 +27,10 @@
 
 #define OK 0 
 #define ERROR 1
+
+#define OPCODE 1
+#define PAYLOAD 1
+#define LINEFEED 1
 
 extern void null_memory(char *memory, int memory_size);
 

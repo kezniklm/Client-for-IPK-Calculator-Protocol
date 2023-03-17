@@ -23,7 +23,7 @@ void udp(struct Arguments *args)
 	char buf[BUFSIZE];
 	char help_buf[BUFSIZE];
 	char temp[BUFSIZE];
-	int buffer_length = 0;
+	int buf_length = 0;
 
 	/* Načítanie spracovaného vstupu */
 	server_hostname = args->host;
@@ -62,8 +62,8 @@ void udp(struct Arguments *args)
 
 		/* Spracovanie vstupu tak aby bol WELL-FORMED */
 		strcpy(buf, "0");
-		sprintf(help_buf, "%ld", strlen(temp) - 1);
-		buffer_length = strlen(temp) - 1 + 2;
+		buf_length = strlen(temp) - LINEFEED + OPCODE + PAYLOAD;
+		help_buf[0] = '\0' + strlen(temp) - LINEFEED;
 		strcat(buf, help_buf);
 		strcat(buf, temp);
 		buf[0] = '\0';
@@ -71,7 +71,7 @@ void udp(struct Arguments *args)
 
 		/* Odoslanie správy od užívateľa na server */
 		serverlen = sizeof(server_address);
-		bytestx = sendto(client_socket, buf, buffer_length, 0, (struct sockaddr *)&server_address, serverlen);
+		bytestx = sendto(client_socket, buf, buf_length, 0, (struct sockaddr *)&server_address, serverlen);
 		if (bytestx < 0)
 		{
 			perror("ERROR: sendto");
@@ -87,16 +87,16 @@ void udp(struct Arguments *args)
 		{
 			perror("ERROR: recvfrom");
 		}
-		if (buf[OPCODE] == RESPONSE)
+		if (buf[OPCODE_POSITION] == RESPONSE)
 		{
 			if (buf[STATUS] == OK)
 			{
-				strncpy(help_buf, buf + 2, sizeof(help_buf) - 2);
+				strncpy(help_buf, buf + OPCODE + STATUS + PAYLOAD , sizeof(help_buf) - OPCODE - STATUS - PAYLOAD);
 				printf("OK:%s\n", help_buf);
 			}
 			else if (buf[STATUS] == ERROR)
 			{
-				strncpy(help_buf, buf + 2, sizeof(help_buf) - 2);
+				strncpy(help_buf, buf + OPCODE + STATUS + PAYLOAD, sizeof(help_buf) - OPCODE - STATUS - PAYLOAD);
 				printf("ERR:%s\n", help_buf);
 				exit(ERROR);
 			}
@@ -105,5 +105,6 @@ void udp(struct Arguments *args)
 				error_exit("Neočakávaný response kód\n");
 			}
 		}
+		buf_length = 0;
 	}
 }
