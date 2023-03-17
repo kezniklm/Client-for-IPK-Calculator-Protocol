@@ -22,8 +22,17 @@
 #define RECIEVE_PAYLOAD 2
 #define SEND_PAYLOAD 1
 
+#define REQUEST 0
+#define RESPONSE 1
+
 #define OK 0 
 #define ERROR 1
 
 extern void null_memory(char *memory, int memory_size);
+
+/**
+ * @brief Vykoná UDP komunikáciu pre zadané argumenty programu
+ *
+ * @param args Skontrolované argumenty programu
+ */
 void udp(struct Arguments *args);
