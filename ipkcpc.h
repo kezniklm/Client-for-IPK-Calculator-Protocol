@@ -6,3 +6,5 @@
  */
 
 #include "tcp.h"
+
+extern void udp(struct Arguments *args);

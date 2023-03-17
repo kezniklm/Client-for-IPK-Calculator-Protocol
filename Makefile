@@ -13,7 +13,7 @@ CFLAGS = -std=c18 -pedantic -Wall -Wextra -Werror -g -fcommon
 .PHONY: error.o args.o tcp.o udp.o ipkcpc.o ipkcpc zip clean
 
 ipkcpc: error.o args.o tcp.o udp.o ipkcpc.o
-	$(CC) $(CFLAGS) error.o args.o tcp.o ipkcpc.o -o ipkcpc
+	$(CC) $(CFLAGS) error.o args.o tcp.o udp.o ipkcpc.o -o ipkcpc
 
 error.o: error.h error.c 
 	$(CC) $(CFLAGS) -c error.c -o error.o

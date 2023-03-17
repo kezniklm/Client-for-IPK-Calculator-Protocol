@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        // udp(arguments);
+        udp(arguments);
     }
 
     free_arguments(arguments);

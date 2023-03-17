@@ -31,3 +31,9 @@ void tcp(struct Arguments *args);
  * @param memory_size Veľkosť pamäti na vynulovanie
  */
 void null_memory(char *memory, int memory_size);
+
+/**
+ * @brief V prípade ukončenia programu pomocou signálu SIGINT ukončí komunikáciu so serverom
+ *
+ */
+void catch_sigint();
