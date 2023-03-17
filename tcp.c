@@ -7,6 +7,7 @@
 
 #include "tcp.h"
 
+/* Globálne premenné z dôvodu potreby zachytenia CTRL+C (SIGINT) */
 char buf[BUFSIZE] = "init";
 int client_socket, bytestx, bytesrx;
 
@@ -63,8 +64,10 @@ void tcp(struct Arguments *args)
 	struct hostent *server;
 	struct sockaddr_in server_address;
 
+	/* Zachytenie CTRL+C (SIGINT) */
 	signal(SIGINT, catch_sigint);
 
+	/* Načítanie spracovaného vstupu */
 	server_hostname = args->host;
 	char *text;
 	port_number = strtol(args->port, &text, 10);
