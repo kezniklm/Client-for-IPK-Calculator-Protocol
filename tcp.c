@@ -35,7 +35,7 @@ void catch_sigint()
 	bytestx = send(client_socket, buf, strlen(buf), 0);
 	if (bytestx < 0)
 	{
-		perror("ERROR in sendto");
+		perror("ERROR in send");
 	}
 
 	null_memory(buf, BUFSIZE);
@@ -43,7 +43,7 @@ void catch_sigint()
 
 	if (bytesrx < 0)
 	{
-		perror("ERROR in recvfrom");
+		perror("ERROR in recv");
 	}
 	printf("%s", buf);
 	fflush(stdout);
@@ -116,7 +116,7 @@ void tcp(struct Arguments *args)
 			bytestx = send(client_socket, buf, strlen(buf), 0);
 			if (bytestx < 0)
 			{
-				perror("ERROR in sendto");
+				perror("ERROR: send");
 			}
 
 			null_memory(buf, BUFSIZE);
@@ -124,7 +124,7 @@ void tcp(struct Arguments *args)
 
 			if (bytesrx < 0)
 			{
-				perror("ERROR in recvfrom");
+				perror("ERROR: recv");
 			}
 			printf("%s", buf);
 
@@ -136,7 +136,7 @@ void tcp(struct Arguments *args)
 		bytestx = send(client_socket, buf, strlen(buf), 0);
 		if (bytestx < 0)
 		{
-			perror("ERROR in sendto");
+			perror("ERROR: send");
 		}
 
 		null_memory(buf, BUFSIZE);
@@ -146,7 +146,7 @@ void tcp(struct Arguments *args)
 
 		if (bytesrx < 0)
 		{
-			perror("ERROR in recvfrom");
+			perror("ERROR: recv");
 		}
 		printf("%s", buf);
 

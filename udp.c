@@ -63,6 +63,10 @@ void udp(struct Arguments *args)
 		/* Spracovanie vstupu tak aby bol WELL-FORMED */
 		strcpy(buf, "0");
 		buf_length = strlen(temp) - LINEFEED + OPCODE + PAYLOAD;
+		if((strlen(temp) - LINEFEED) > PAYLOAD_LENGTH_MAX)
+		{
+			error_exit("Zadaný vstupný text je dlhší ako maximálny povolený počet znakov");
+		}
 		help_buf[0] = '\0' + strlen(temp) - LINEFEED;
 		strcat(buf, help_buf);
 		strcat(buf, temp);

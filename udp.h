@@ -32,6 +32,8 @@
 #define PAYLOAD 1
 #define LINEFEED 1
 
+#define PAYLOAD_LENGTH_MAX 255
+
 extern void null_memory(char *memory, int memory_size);
 
 /**

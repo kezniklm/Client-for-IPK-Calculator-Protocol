@@ -6,10 +6,6 @@
  * Prelozene: GCC 11.3.0
  */
 
-#include <stdlib.h>     
-#include <stdio.h>
-#include <stdarg.h>
-
 #include "error.h"
 
 void warning_msg(const char *fmt, ...)
