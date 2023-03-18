@@ -126,7 +126,7 @@ Testovanie bolo vykonávané na operačných systémoch Ubuntu a referenčnom Ni
         ![ARG_TEST9](./test/args/Screenshot_9.png)
         ![ARG_TEST10](./test/args/Screenshot_10.png)
     * Testovanie módu TCP \
-    Nasledovalo testovanie módu TCP voči referenčnému serveru pre zadané vstupy
+    Nasledovalo testovanie módu TCP voči referenčnému serveru na IP adrese 127.0.0.1 (localhost) pre zadané vstupy
         * Testovanie správnych vstupov
         ![TCP_TEST1](./test/tcp/Screenshot_1.png)
         ![TCP_TEST2](./test/tcp/Screenshot_2.png)
@@ -140,7 +140,7 @@ Testovanie bolo vykonávané na operačných systémoch Ubuntu a referenčnom Ni
         ![TCP_TEST9](./test/tcp/Screenshot_9.png)
         ![TCP_TEST10](./test/tcp/Screenshot_10.png)
     * Testovanie módu UDP \
-    Nasledovalo testovanie módu UDP voči referenčnému serveru pre zadané vstupy
+    Nasledovalo testovanie módu UDP voči referenčnému serveru na IP adrese 127.0.0.1 (localhost) pre zadané vstupy
         * Testovanie správnych vstupov
         ![UDP_TEST1](./test/udp/Screenshot_1.png)
         ![UDP_TEST2](./test/udp/Screenshot_2.png)
@@ -151,7 +151,7 @@ Testovanie bolo vykonávané na operačných systémoch Ubuntu a referenčnom Ni
         ![UDP_TEST6](./test/udp/Screenshot_6.png)
 
 * **Ubuntu 22.04.2 LTS - WSL** \
-    Testovanie na operačnom systéme **Ubuntu 22.04.2 LTS** prebiehalo s rovnakými vstupmi ako na **NixOs verzie 22.11.20230221.a3d745e (Raccoon)** pričom sa ukázalo, že všetky výstupy sú totožné. Z toho dôvodu obrázky z testovania neuvádzam.
+    Testovanie na operačnom systéme **Ubuntu 22.04.2 LTS** prebiehalo voči serveru na IP adrese 147.229.176.19, porte 10002, ktorý sa nachádza na serveri Merlin a je dielom môjho kolegu, takže sa jednalo taktiež aj o testovanie daného serveru. Testovanie bolo vykonané s rovnakými vstupmi ako na **NixOs verzie 22.11.20230221.a3d745e (Raccoon)** pričom sa ukázalo, že všetky výstupy sú totožné. Z toho dôvodu obrázky z testovania neuvádzam.
 
 ## Zdroje
 <a id="ref1"></a> [1] Kurose, J. F., & Ross, K. W. (2017). Computer Networking: A Top-Down Approach. Pearson. (Kapitola 4)
