@@ -113,7 +113,7 @@ Testovanie bolo vykonávané na operačných systémoch Ubuntu a referenčnom Ni
 * **NixOs verzie 22.11.20230221.a3d745e (Raccoon)** 
     * Testovanie argumentov programu \
     Ako prvé bolo vykonané testovanie vstupu pri spúšťaní programu
-        * Testovanie správnych vstupov
+        * Testovanie správnych vstupov \
         ![ARG_TEST1](./test/args/Screenshot_1.png)
         ![ARG_TEST2](./test/args/Screenshot_2.png)
         ![ARG_TEST3](./test/args/Screenshot_3.png)
