@@ -19,6 +19,7 @@ void udp(struct Arguments *args)
 	const char *server_hostname;
 	struct hostent *server;
 	struct sockaddr_in server_address;
+	struct pollfd pfd[1];
 
 	char buf[BUFSIZE];
 	char help_buf[BUFSIZE];
@@ -63,7 +64,7 @@ void udp(struct Arguments *args)
 		/* Spracovanie vstupu tak aby bol WELL-FORMED */
 		strcpy(buf, "0");
 		buf_length = strlen(temp) - LINEFEED + OPCODE + PAYLOAD;
-		if((strlen(temp) - LINEFEED) > PAYLOAD_LENGTH_MAX)
+		if ((strlen(temp) - LINEFEED) > PAYLOAD_LENGTH_MAX)
 		{
 			error_exit("Zadaný vstupný text je dlhší ako maximálny povolený počet znakov");
 		}
@@ -81,6 +82,20 @@ void udp(struct Arguments *args)
 			perror("ERROR: sendto");
 		}
 
+		pfd[0].fd = client_socket;
+		pfd[0].events = POLLIN;
+
+		int n = poll(pfd, 1, ALLOWED_TIMEOUT * 1000);
+
+		if (n == 0)
+		{
+			warning_msg("Timeout\n");
+			continue;
+		}
+		else if (n < 0)
+		{
+			error_exit("%s\n", strerror(errno));
+		}
 		null_memory(buf, BUFSIZE);
 		null_memory(help_buf, BUFSIZE);
 		null_memory(temp, BUFSIZE);
@@ -95,14 +110,14 @@ void udp(struct Arguments *args)
 		{
 			if (buf[STATUS] == OK)
 			{
-				strncpy(help_buf, buf + OPCODE + STATUS + PAYLOAD , sizeof(help_buf) - OPCODE - STATUS - PAYLOAD);
+				strncpy(help_buf, buf + OPCODE + STATUS + PAYLOAD, sizeof(help_buf) - OPCODE - STATUS - PAYLOAD);
 				printf("OK:%s\n", help_buf);
 			}
 			else if (buf[STATUS] == ERROR)
 			{
 				strncpy(help_buf, buf + OPCODE + STATUS + PAYLOAD, sizeof(help_buf) - OPCODE - STATUS - PAYLOAD);
 				printf("ERR:%s\n", help_buf);
-				exit(ERROR);
+				/* ErrorExit ?*/
 			}
 			else
 			{

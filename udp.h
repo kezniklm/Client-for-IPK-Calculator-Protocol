@@ -21,6 +21,8 @@
     #include <netinet/in.h>
     #include <unistd.h>
     #include <signal.h>
+    #include <poll.h>
+    #include <errno.h>
 #endif
 
 #include "args.h"
@@ -42,6 +44,7 @@
 #define LINEFEED 1
 
 #define PAYLOAD_LENGTH_MAX 255
+#define ALLOWED_TIMEOUT 1
 
 extern void null_memory(char *memory, int memory_size);
 

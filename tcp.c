@@ -10,6 +10,7 @@
 /* Globálne premenné z dôvodu potreby zachytenia CTRL+C (SIGINT) */
 char buf[BUFSIZE] = "init";
 int client_socket, bytestx, bytesrx;
+bool hello_flag = false;
 
 /**
  * @brief Vynuluje pamäť zadanú ako argument funkcie o zadanej veľkosti
@@ -37,16 +38,20 @@ void catch_sigint()
 	{
 		perror("ERROR in send");
 	}
-
-	null_memory(buf, BUFSIZE);
-	bytesrx = recv(client_socket, buf, BUFSIZE, 0);
-
-	if (bytesrx < 0)
+	
+	if (hello_flag)
 	{
-		perror("ERROR in recv");
+		null_memory(buf, BUFSIZE);
+		bytesrx = recv(client_socket, buf, BUFSIZE, 0);
+
+		if (bytesrx < 0)
+		{
+			perror("ERROR in recv");
+		}
+		printf("%s", buf);
+		fflush(stdout);
 	}
-	printf("%s", buf);
-	fflush(stdout);
+
 	close(client_socket);
 
 	exit(SIGINT);
@@ -155,6 +160,11 @@ void tcp(struct Arguments *args)
 		{
 			break;
 		}
+		if (!strcmp(buf, "HELLO\n"))
+		{
+			hello_flag = true;
+		}
+
 		null_memory(buf, BUFSIZE);
 	}
 	/* Ukončenie spojenia */
