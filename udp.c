@@ -117,7 +117,6 @@ void udp(struct Arguments *args)
 			{
 				strncpy(help_buf, buf + OPCODE + STATUS + PAYLOAD, sizeof(help_buf) - OPCODE - STATUS - PAYLOAD);
 				printf("ERR:%s\n", help_buf);
-				/* ErrorExit ?*/
 			}
 			else
 			{

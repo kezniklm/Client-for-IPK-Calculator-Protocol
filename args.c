@@ -9,9 +9,9 @@
 
 /**
  * @brief Skontroluje octety IPV4 adresy aby boli v intervale <0,255>
- * 
- * @param octet 
- * @param octet_num 
+ *
+ * @param octet
+ * @param octet_num
  */
 void check_scope(char *octet, int *octet_num)
 {
@@ -21,7 +21,7 @@ void check_scope(char *octet, int *octet_num)
     }
     char *tmp;
     int int_octet = strtol(octet, &tmp, 10);
-    if (strcmp(tmp,"") != 0 || int_octet < 0 || int_octet > 255)
+    if (strcmp(tmp, "") != 0 || int_octet < 0 || int_octet > 255)
     {
         error_exit("IP adresa nemá požadovaný formát\n");
     }
@@ -30,8 +30,8 @@ void check_scope(char *octet, int *octet_num)
 
 /**
  * @brief Skontroluje formát zadanej IPV4 adresy
- * 
- * @param ip_adress 
+ *
+ * @param ip_adress
  */
 void check_ip_format(char *ip_adress)
 {
@@ -56,8 +56,8 @@ void check_ip_format(char *ip_adress)
 
 /**
  * @brief Skontroluje formát zadaného portu
- * 
- * @param port 
+ *
+ * @param port
  */
 void check_port_format(char *port)
 {
@@ -68,15 +68,15 @@ void check_port_format(char *port)
     char *tmp;
     int int_port = strtol(port, &tmp, 10);
 
-    if (strcmp(tmp,"") != 0 || int_port < 0 || int_port > MAX_PORT)
+    if (strcmp(tmp, "") != 0 || int_port < 0 || int_port > MAX_PORT)
     {
-       error_exit("Port nemá požadovaný formát\n"); 
+        error_exit("Port nemá požadovaný formát\n");
     }
 }
 
 /**
  * @brief Skontroluje a spracuje argumenty programu ipkcpc
- * 
+ *
  * @param argc Počet argumentov
  * @param argv Argumenty programu
  * @param args Štruktúra na uloženie spracovaných argumentov
@@ -85,24 +85,29 @@ void arg_check(int argc, char *argv[], struct Arguments *args)
 {
     if (argc != ARGUMENTS_NUMBER)
     {
-        error_exit("Nesprávny počet argumentov programu\n");
+        if (argc == 2 && (!strcmp(argv[1], "--help") || (!strcmp(argv[1], "--h"))))
+        {
+            printf("Názov:\n    ipkcpc - klient pre IPK Calculator Protocol\n\nPoužitie:\n  ./ipkcpc -h <host> -p <port> -m <mode>\n\n  ./ipkcpc --help \n\n  ./ipkcpc --h \nPopis:\n    Klient pre IPK Calculator Protokol (IPKCP) komunikuje pomocou TCP alebo UDP protokolu so servermi používajúcimi protokol IPKCP.\n");
+            exit(EXIT_SUCCESS);
+        }
+        error_exit("Nesprávny počet argumentov programu. Pre viac informácií zadajte ./ipkcpc --h\n");
     }
     for (int argument = FIRST_ARGUMENT; argument < ARGUMENTS_NUMBER; argument++)
     {
         if (!strcmp(argv[argument], "-h"))
         {
-            if(argv[argument + 1] != NULL)
+            if (argv[argument + 1] != NULL)
             {
-                strncpy(args->host,argv[argument + 1],IP_LENGTH + ENDING_ZERO);
+                strncpy(args->host, argv[argument + 1], IP_LENGTH + ENDING_ZERO);
             }
             check_ip_format(argv[argument + 1]);
             argument++;
         }
         else if (!strcmp(argv[argument], "-p"))
         {
-            if(argv[argument + 1] != NULL)
+            if (argv[argument + 1] != NULL)
             {
-                strncpy(args->port,argv[argument + 1],MAX_PORT_LENGTH + ENDING_ZERO);
+                strncpy(args->port, argv[argument + 1], MAX_PORT_LENGTH + ENDING_ZERO);
             }
             check_port_format(argv[argument + 1]);
             argument++;
@@ -115,25 +120,25 @@ void arg_check(int argc, char *argv[], struct Arguments *args)
             }
             else if (!strcmp(argv[argument + 1], "udp"))
             {
-                args->mode = UDP;  
+                args->mode = UDP;
             }
             else
             {
-                error_exit("Nesprávny mód pri zadávaní argumentov programu\n");
+                error_exit("Nesprávny mód pri zadávaní argumentov programu. Pre viac informácií zadajte ./ipkcpc --h\n");
             }
             argument++;
         }
         else
         {
-            error_exit("Nesprávny argument zadaný pri zadávaní argumentov programu\n");
+            error_exit("Nesprávny argument zadaný pri zadávaní argumentov programu. Pre viac informácií zadajte ./ipkcpc --h\n");
         }
     }
 }
 
 /**
  * @brief Uvoľní pamäť alokovanú štruktúrou Arguments
- * 
- * @param args 
+ *
+ * @param args
  */
 void free_arguments(struct Arguments *args)
 {
@@ -141,4 +146,3 @@ void free_arguments(struct Arguments *args)
     free(args->port);
     free(args);
 }
-
