@@ -117,7 +117,7 @@ Testovanie bolo vykonávané na operačných systémoch Ubuntu a referenčnom Ni
         ![ARG_TEST1](./test/args/Screenshot_1.png)
         ![ARG_TEST2](./test/args/Screenshot_2.png)
         ![ARG_TEST3](./test/args/Screenshot_3.png)
-        * Testovanie nesprávnych vstupov
+        * Testovanie nesprávnych vstupov \
         ![ARG_TEST4](./test/args/Screenshot_4.png)
         ![ARG_TEST5](./test/args/Screenshot_5.png)
         ![ARG_TEST6](./test/args/Screenshot_6.png)
@@ -127,25 +127,25 @@ Testovanie bolo vykonávané na operačných systémoch Ubuntu a referenčnom Ni
         ![ARG_TEST10](./test/args/Screenshot_10.png)
     * Testovanie módu TCP \
     Nasledovalo testovanie módu TCP voči referenčnému serveru na IP adrese 127.0.0.1 (localhost) pre zadané vstupy
-        * Testovanie správnych vstupov
+        * Testovanie správnych vstupov \
         ![TCP_TEST1](./test/tcp/Screenshot_1.png)
         ![TCP_TEST2](./test/tcp/Screenshot_2.png)
         ![TCP_TEST3](./test/tcp/Screenshot_3.png)
         ![TCP_TEST4](./test/tcp/Screenshot_4.png)
         ![TCP_TEST5](./test/tcp/Screenshot_5.png)
         ![TCP_TEST6](./test/tcp/Screenshot_6.png)
-        * Testovanie nesprávnych vstupov
+        * Testovanie nesprávnych vstupov \
         ![TCP_TEST7](./test/tcp/Screenshot_7.png)
         ![TCP_TEST8](./test/tcp/Screenshot_8.png)
         ![TCP_TEST9](./test/tcp/Screenshot_9.png)
         ![TCP_TEST10](./test/tcp/Screenshot_10.png)
     * Testovanie módu UDP \
     Nasledovalo testovanie módu UDP voči referenčnému serveru na IP adrese 127.0.0.1 (localhost) pre zadané vstupy
-        * Testovanie správnych vstupov
+        * Testovanie správnych vstupov \
         ![UDP_TEST1](./test/udp/Screenshot_1.png)
         ![UDP_TEST2](./test/udp/Screenshot_2.png)
         ![UDP_TEST3](./test/udp/Screenshot_3.png)
-        * Testovanie nesprávnych vstupov
+        * Testovanie nesprávnych vstupov \
         ![UDP_TEST4](./test/udp/Screenshot_4.png)
         ![UDP_TEST5](./test/udp/Screenshot_5.png)
         ![UDP_TEST6](./test/udp/Screenshot_6.png)
