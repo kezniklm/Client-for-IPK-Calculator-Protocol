@@ -31,7 +31,7 @@ ipkcpc.o: ipkcpc.h
 	$(CC) $(CFLAGS) -c ipkcpc.c -o ipkcpc.o
 
 zip:
-	zip xkezni01 *
+	zip -r xkezni01 * .gitignore
 	
 clean:
 	rm -f ipkcpc
