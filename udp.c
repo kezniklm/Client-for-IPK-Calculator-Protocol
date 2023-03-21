@@ -85,6 +85,7 @@ void udp(struct Arguments *args)
 		pfd[0].fd = client_socket;
 		pfd[0].events = POLLIN;
 
+		/* Čakanie na odpoveď od servera maximálne 3 sekundy, inak timeout */
 		int n = poll(pfd, 1, ALLOWED_TIMEOUT * 1000);
 
 		if (n == 0)
