@@ -44,7 +44,7 @@
 #define LINEFEED 1
 
 #define PAYLOAD_LENGTH_MAX 255
-#define ALLOWED_TIMEOUT 1
+#define ALLOWED_TIMEOUT 3
 
 extern void null_memory(char *memory, int memory_size);
 

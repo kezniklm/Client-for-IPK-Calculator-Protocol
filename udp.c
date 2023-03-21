@@ -89,13 +89,14 @@ void udp(struct Arguments *args)
 
 		if (n == 0)
 		{
-			warning_msg("Timeout\n");
+			error_exit("Timeout - server je nedostupný\n");
 			continue;
 		}
 		else if (n < 0)
 		{
 			error_exit("%s\n", strerror(errno));
 		}
+
 		null_memory(buf, BUFSIZE);
 		null_memory(help_buf, BUFSIZE);
 		null_memory(temp, BUFSIZE);
@@ -122,6 +123,10 @@ void udp(struct Arguments *args)
 			{
 				error_exit("Neočakávaný response kód\n");
 			}
+		}
+		else
+		{
+			error_exit("Neočakávaný status kód\n");
 		}
 		buf_length = 0;
 	}

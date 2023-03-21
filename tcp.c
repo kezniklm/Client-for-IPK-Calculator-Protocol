@@ -30,8 +30,6 @@ void catch_sigint()
 {
 	null_memory(buf, BUFSIZE);
 	strcpy(buf, "BYE\n");
-	printf("%s", buf);
-	fflush(stdout);
 	bytestx = send(client_socket, buf, strlen(buf), 0);
 	if (bytestx < 0)
 	{
