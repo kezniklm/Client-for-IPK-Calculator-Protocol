@@ -34,7 +34,7 @@ struct Arguments
 
 /**
  * @brief Skontroluje a spracuje argumenty programu ipkcpc
- * 
+ *
  * @param argc Počet argumentov
  * @param argv Argumenty programu
  * @param args Štruktúra na uloženie spracovaných argumentov
@@ -43,29 +43,29 @@ void arg_check(int argc, char *argv[], struct Arguments *args);
 
 /**
  * @brief Skontroluje formát zadaného portu
- * 
- * @param port 
+ *
+ * @param port
  */
 void check_port_format(char *port);
 
 /**
  * @brief Skontroluje formát zadanej IPV4 adresy
- * 
- * @param ip_adress 
+ *
+ * @param ip_adress
  */
 void check_ip_format(char *ip_adress);
 
 /**
  * @brief Skontroluje octety IPV4 adresy aby boli v intervale <0,255>
- * 
- * @param octet 
- * @param octet_num 
+ *
+ * @param octet
+ * @param octet_num
  */
 void check_scope(char *octet, int *octet_num);
 
 /**
  * @brief Uvoľní pamäť alokovanú štruktúrou Arguments
- * 
- * @param args 
+ *
+ * @param args
  */
 void free_arguments(struct Arguments *args);

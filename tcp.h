@@ -7,20 +7,20 @@
 
 /* Knižnice pre prácu na Windows operačnom systéme */
 #ifdef _WIN32
-    #include <winsock2.h>
-    #include <ws2tcpip.h>
-    #include <Windows.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <Windows.h>
 #endif
 
 /* Knižnice pre prácu na Unix operačnom systéme */
 #ifdef __unix__
-    #include <sys/socket.h>
-    #include <sys/types.h>
-    #include <netdb.h>
-    #include <arpa/inet.h>
-    #include <netinet/in.h>
-    #include <unistd.h>
-    #include <signal.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <signal.h>
 #endif
 
 #include "args.h"
@@ -28,7 +28,7 @@
 #define BUFSIZE 1024
 
 /**
- * @brief Vykoná TCP komunikáciu pre zadané argumenty programu 
+ * @brief Vykoná TCP komunikáciu pre zadané argumenty programu
  *
  * @param args Skontrolované argumenty programu
  */

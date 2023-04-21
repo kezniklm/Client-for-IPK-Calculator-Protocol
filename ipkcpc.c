@@ -12,6 +12,11 @@ int main(int argc, char *argv[])
     struct Arguments *arguments = calloc(1, sizeof(struct Arguments));
     arguments->host = calloc(16, sizeof(char));
     arguments->port = calloc(6, sizeof(char));
+    if (!arguments || !arguments->host || !arguments->port)
+    {
+        error_exit("Chyba pri alokácii pamäte");
+    }
+
     arg_check(argc, argv, arguments);
 
     if (arguments->mode == TCP)
