@@ -4,6 +4,9 @@
 ## Zadanie
 Cieľom projektu bolo vytvoriť klienta pre IPK Calculator Protokol (IPKCP), ktorý komunikuje pomocou TCP alebo UDP protokolu so servermi používajúcimi protokol IPKCP.
 
+## Výsledné hodnotenie
+16/20 bodov
+
 ## Implementácia 
 
 Projekt je implementovaný v jazyku C, revízia C18 (ISO/IEC 9899:2018). Doporučuje sa prekladač **gcc verzie 7.5.0** a jeho novšie vydania.
