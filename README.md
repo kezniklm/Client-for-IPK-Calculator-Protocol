@@ -1,4 +1,4 @@
-# IPK projekt 1
+# Client for IPK Calculator Protocol
 ## Autor
 [Matej Keznikl ( xkezni01 )](https://github.com/kezniklm/)
 ## Zadanie
